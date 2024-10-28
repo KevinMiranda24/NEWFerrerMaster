@@ -43,6 +43,7 @@
 			txtNombre = new TextBox();
 			label1 = new Label();
 			button1 = new Button();
+			label5 = new Label();
 			bntSalir = new Button();
 			((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
 			SuspendLayout();
@@ -187,11 +188,22 @@
 			button1.Text = "Limpiar";
 			button1.UseVisualStyleBackColor = false;
 			// 
+			// label5
+			// 
+			label5.AutoSize = true;
+			label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label5.Location = new Point(326, 65);
+			label5.Name = "label5";
+			label5.Size = new Size(244, 32);
+			label5.TabIndex = 52;
+			label5.Text = "Detalles del Clientes";
+			// 
 			// Clientes
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(800, 450);
+			Controls.Add(label5);
 			Controls.Add(button1);
 			Controls.Add(bntSalir);
 			Controls.Add(txtDireccion);
@@ -232,5 +244,6 @@
         private TextBox txtNombre;
         private Label label1;
 		private Button button1;
+		private Label label5;
 	}
 }
