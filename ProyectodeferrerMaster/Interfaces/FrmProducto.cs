@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using ProyectodeferrerMaster.Modelos;
+﻿using ProyectodeferrerMaster.Modelos;
 
 namespace ProyectodeferrerMaster.Interfaces
 {
-    public partial class FrmProducto : Form
+	public partial class FrmProducto : Form
     {
         private bool isEditMode = false;
         private int productoId = 0;

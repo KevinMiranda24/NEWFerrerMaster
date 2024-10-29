@@ -1,15 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using ProyectodeferrerMaster.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProyectodeferrerMaster
 {
-    internal class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+	internal class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
 
         public ApplicationDbContext CreateDbContext(string[] args = null)

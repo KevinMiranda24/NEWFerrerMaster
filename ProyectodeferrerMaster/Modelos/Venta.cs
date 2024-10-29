@@ -1,13 +1,6 @@
-﻿using ProyectodeferrerMaster.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProyectodeferrerMaster.Modelos
+﻿namespace ProyectodeferrerMaster.Modelos
 {
-    internal class Venta
+	internal class Venta
     {
         public int IdVenta { get; set; }
         public int? IdCliente { get; set; }

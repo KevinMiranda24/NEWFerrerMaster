@@ -1,12 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Security.Cryptography;
 
 namespace ProyectodeferrerMaster.Modelos
 {
-    internal class Services
+	internal class Services
     {
         private readonly ApplicationDbContext _myDbContext;
 
