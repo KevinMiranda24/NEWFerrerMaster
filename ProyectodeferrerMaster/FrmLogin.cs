@@ -3,14 +3,14 @@ using ProyectodeferrerMaster.Modelos;
 
 namespace ProyectodeferrerMaster
 {
-    public partial class Form1 : Form
+    public partial class FrmLogin : Form
     {
         private readonly Services services; // Instancia del servicio para manejar login
 
 
 
         // Constructor que recibe el servicio inyectado
-        public Form1()
+        public FrmLogin()
         {
             InitializeComponent();
             var dbContext = new ApplicationDbContext();
