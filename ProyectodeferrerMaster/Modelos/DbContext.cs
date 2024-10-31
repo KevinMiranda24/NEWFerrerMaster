@@ -25,9 +25,7 @@ namespace ProyectodeferrerMaster.Modelos
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Venta> Ventas { get; set; }
-        public DbSet<Inventario> Inventarios { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<DetalleDeVenta> DetalleDeVenta { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
 
 
@@ -40,9 +38,7 @@ namespace ProyectodeferrerMaster.Modelos
             modelBuilder.Entity<Cliente>().HasKey(c => c.IdCliente);
             modelBuilder.Entity<Producto>().HasKey(pr => pr.IdProducto);
             modelBuilder.Entity<Venta>().HasKey(v => v.IdVenta);;
-            modelBuilder.Entity<Inventario>().HasKey(i => i.IdInventario);
             modelBuilder.Entity<Usuario>().HasKey(u => u.Id);
-            modelBuilder.Entity<DetalleDeVenta>().HasKey(dv => dv.IdDetalleDeVenta);
             modelBuilder.Entity<Categoria>().HasKey(ct => ct.IdCategoria);
 
 
@@ -54,19 +50,6 @@ namespace ProyectodeferrerMaster.Modelos
             modelBuilder.Entity<Venta>()
                 .Property(v => v.Total)
                 .HasColumnType("decimal(10, 2)");
-
-            modelBuilder.Entity<DetalleDeVenta>()
-                .HasKey(d => d.IdDetalleDeVenta);
-
-            modelBuilder.Entity<DetalleDeVenta>()
-                .HasOne(d => d.Producto)
-                .WithMany() // o `WithMany(p => p.DetallesDeVenta)` si tienes una lista en `Producto`
-                .HasForeignKey(d => d.IdProducto);
-
-            modelBuilder.Entity<DetalleDeVenta>()
-                .HasOne(d => d.Venta)
-                .WithMany() // o `WithMany(v => v.DetallesDeVenta)` si tienes una lista en `Venta`
-                .HasForeignKey(d => d.IdVenta);
 
             // Relación Productos -> Proveedores
             modelBuilder.Entity<Producto>()
@@ -82,12 +65,6 @@ namespace ProyectodeferrerMaster.Modelos
                 .HasForeignKey(v => v.IdCliente) // Usar ClienteId como clave foránea
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Relación Inventario -> Productos
-            modelBuilder.Entity<Inventario>()
-                .HasOne(i => i.Producto)
-                .WithMany()
-                .HasForeignKey(i => i.IdProducto)
-                .OnDelete(DeleteBehavior.Restrict);
         }
 
 

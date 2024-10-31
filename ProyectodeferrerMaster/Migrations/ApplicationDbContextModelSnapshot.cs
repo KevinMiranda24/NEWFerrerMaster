@@ -22,6 +22,23 @@ namespace ProyectodeferrerMaster.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ProyectodeferrerMaster.Modelos.Categoria", b =>
+                {
+                    b.Property<int>("IdCategoria")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategoria"));
+
+                    b.Property<string>("NombreCategoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdCategoria");
+
+                    b.ToTable("Categorias");
+                });
+
             modelBuilder.Entity("ProyectodeferrerMaster.Modelos.Cliente", b =>
                 {
                     b.Property<int>("IdCliente")
@@ -49,69 +66,6 @@ namespace ProyectodeferrerMaster.Migrations
                     b.HasKey("IdCliente");
 
                     b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("ProyectodeferrerMaster.Modelos.DetalleVenta", b =>
-                {
-                    b.Property<int>("IdDetalleVenta")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDetalleVenta"));
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVenta")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("PrecioUnitario")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<int>("ProductoIdProducto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VentaIdVenta")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdDetalleVenta");
-
-                    b.HasIndex("ProductoIdProducto");
-
-                    b.HasIndex("VentaIdVenta");
-
-                    b.ToTable("DetalleVenta");
-                });
-
-            modelBuilder.Entity("ProyectodeferrerMaster.Modelos.Inventario", b =>
-                {
-                    b.Property<int>("IdInventario")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdInventario"));
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FechaMovimiento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdProducto")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TipoMovimiento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdInventario");
-
-                    b.HasIndex("IdProducto");
-
-                    b.ToTable("Inventarios");
                 });
 
             modelBuilder.Entity("ProyectodeferrerMaster.Modelos.Producto", b =>
@@ -142,10 +96,6 @@ namespace ProyectodeferrerMaster.Migrations
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
-
-                    b.Property<string>("UnidadMedida")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProducto");
 
@@ -195,10 +145,6 @@ namespace ProyectodeferrerMaster.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NombreUsuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -220,10 +166,19 @@ namespace ProyectodeferrerMaster.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVenta"));
 
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaVenta")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("IdCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrecioUnitario")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
@@ -234,36 +189,6 @@ namespace ProyectodeferrerMaster.Migrations
                     b.HasIndex("IdCliente");
 
                     b.ToTable("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectodeferrerMaster.Modelos.DetalleVenta", b =>
-                {
-                    b.HasOne("ProyectodeferrerMaster.Modelos.Producto", "Producto")
-                        .WithMany()
-                        .HasForeignKey("ProductoIdProducto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProyectodeferrerMaster.Modelos.Venta", "Venta")
-                        .WithMany()
-                        .HasForeignKey("VentaIdVenta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Producto");
-
-                    b.Navigation("Venta");
-                });
-
-            modelBuilder.Entity("ProyectodeferrerMaster.Modelos.Inventario", b =>
-                {
-                    b.HasOne("ProyectodeferrerMaster.Modelos.Producto", "Producto")
-                        .WithMany()
-                        .HasForeignKey("IdProducto")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("ProyectodeferrerMaster.Modelos.Producto", b =>

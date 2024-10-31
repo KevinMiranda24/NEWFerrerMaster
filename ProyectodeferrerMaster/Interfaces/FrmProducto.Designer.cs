@@ -35,7 +35,6 @@
             numPrecioUnitario = new NumericUpDown();
             lblPrecioUnitario = new Label();
             cmbProveedor = new ComboBox();
-            txtUnidadMedida = new TextBox();
             lblStock = new Label();
             cmbCategoria = new ComboBox();
             lblCategoria = new Label();
@@ -44,7 +43,6 @@
             btnEliminar = new Button();
             dgvProductos = new DataGridView();
             numStock = new NumericUpDown();
-            lblUnidadMedida = new Label();
             lblProveedor = new Label();
             txtDescripcion = new TextBox();
             label1 = new Label();
@@ -83,7 +81,7 @@
             lblNombreProducto.AutoSize = true;
             lblNombreProducto.Font = new Font("Segoe UI", 12F);
             lblNombreProducto.ForeColor = Color.FromArgb(52, 73, 94);
-            lblNombreProducto.Location = new Point(3, 127);
+            lblNombreProducto.Location = new Point(3, 144);
             lblNombreProducto.Name = "lblNombreProducto";
             lblNombreProducto.Size = new Size(171, 28);
             lblNombreProducto.TabIndex = 0;
@@ -92,7 +90,7 @@
             // txtNombreProducto
             // 
             txtNombreProducto.BorderStyle = BorderStyle.FixedSingle;
-            txtNombreProducto.Location = new Point(165, 127);
+            txtNombreProducto.Location = new Point(165, 145);
             txtNombreProducto.Margin = new Padding(3, 4, 3, 4);
             txtNombreProducto.Name = "txtNombreProducto";
             txtNombreProducto.Size = new Size(210, 27);
@@ -103,7 +101,7 @@
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 12F);
             lblDescripcion.ForeColor = Color.FromArgb(52, 73, 94);
-            lblDescripcion.Location = new Point(3, 196);
+            lblDescripcion.Location = new Point(3, 204);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(114, 28);
             lblDescripcion.TabIndex = 2;
@@ -111,7 +109,7 @@
             // 
             // numPrecioUnitario
             // 
-            numPrecioUnitario.Location = new Point(541, 199);
+            numPrecioUnitario.Location = new Point(541, 204);
             numPrecioUnitario.Margin = new Padding(3, 4, 3, 4);
             numPrecioUnitario.Name = "numPrecioUnitario";
             numPrecioUnitario.Size = new Size(137, 27);
@@ -122,7 +120,7 @@
             lblPrecioUnitario.AutoSize = true;
             lblPrecioUnitario.Font = new Font("Segoe UI", 12F);
             lblPrecioUnitario.ForeColor = Color.FromArgb(52, 73, 94);
-            lblPrecioUnitario.Location = new Point(402, 199);
+            lblPrecioUnitario.Location = new Point(402, 205);
             lblPrecioUnitario.Name = "lblPrecioUnitario";
             lblPrecioUnitario.Size = new Size(142, 28);
             lblPrecioUnitario.TabIndex = 4;
@@ -131,27 +129,19 @@
             // cmbProveedor
             // 
             cmbProveedor.FormattingEnabled = true;
-            cmbProveedor.Location = new Point(810, 132);
+            cmbProveedor.Location = new Point(810, 149);
             cmbProveedor.Margin = new Padding(3, 4, 3, 4);
             cmbProveedor.Name = "cmbProveedor";
             cmbProveedor.Size = new Size(186, 28);
             cmbProveedor.TabIndex = 5;
-            // 
-            // txtUnidadMedida
-            // 
-            txtUnidadMedida.BorderStyle = BorderStyle.FixedSingle;
-            txtUnidadMedida.Location = new Point(143, 272);
-            txtUnidadMedida.Margin = new Padding(3, 4, 3, 4);
-            txtUnidadMedida.Name = "txtUnidadMedida";
-            txtUnidadMedida.Size = new Size(114, 27);
-            txtUnidadMedida.TabIndex = 7;
+            cmbProveedor.SelectedIndexChanged += cmbProveedor_SelectedIndexChanged;
             // 
             // lblStock
             // 
             lblStock.AutoSize = true;
             lblStock.Font = new Font("Segoe UI", 12F);
             lblStock.ForeColor = Color.FromArgb(52, 73, 94);
-            lblStock.Location = new Point(718, 201);
+            lblStock.Location = new Point(739, 205);
             lblStock.Name = "lblStock";
             lblStock.Size = new Size(60, 28);
             lblStock.TabIndex = 6;
@@ -160,7 +150,7 @@
             // cmbCategoria
             // 
             cmbCategoria.FormattingEnabled = true;
-            cmbCategoria.Location = new Point(497, 127);
+            cmbCategoria.Location = new Point(497, 147);
             cmbCategoria.Margin = new Padding(3, 4, 3, 4);
             cmbCategoria.Name = "cmbCategoria";
             cmbCategoria.Size = new Size(180, 28);
@@ -179,7 +169,7 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(99, 335);
+            btnGuardar.Location = new Point(114, 321);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(98, 43);
@@ -194,7 +184,7 @@
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnLimpiar.ForeColor = Color.White;
-            btnLimpiar.Location = new Point(227, 336);
+            btnLimpiar.Location = new Point(242, 323);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(106, 44);
@@ -209,10 +199,10 @@
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(363, 336);
+            btnEliminar.Location = new Point(378, 323);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(99, 46);
+            btnEliminar.Size = new Size(99, 45);
             btnEliminar.TabIndex = 12;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
@@ -220,6 +210,8 @@
             // 
             // dgvProductos
             // 
+            dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProductos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProductos.Location = new Point(14, 408);
             dgvProductos.Margin = new Padding(3, 4, 3, 4);
@@ -231,29 +223,18 @@
             // 
             // numStock
             // 
-            numStock.Location = new Point(778, 200);
+            numStock.Location = new Point(810, 205);
             numStock.Margin = new Padding(3, 4, 3, 4);
             numStock.Name = "numStock";
             numStock.Size = new Size(137, 27);
             numStock.TabIndex = 14;
-            // 
-            // lblUnidadMedida
-            // 
-            lblUnidadMedida.AutoSize = true;
-            lblUnidadMedida.Font = new Font("Segoe UI", 12F);
-            lblUnidadMedida.ForeColor = Color.FromArgb(52, 73, 94);
-            lblUnidadMedida.Location = new Point(3, 272);
-            lblUnidadMedida.Name = "lblUnidadMedida";
-            lblUnidadMedida.Size = new Size(148, 28);
-            lblUnidadMedida.TabIndex = 15;
-            lblUnidadMedida.Text = "Unidad Medida";
             // 
             // lblProveedor
             // 
             lblProveedor.AutoSize = true;
             lblProveedor.Font = new Font("Segoe UI", 12F);
             lblProveedor.ForeColor = Color.FromArgb(52, 73, 94);
-            lblProveedor.Location = new Point(710, 129);
+            lblProveedor.Location = new Point(710, 151);
             lblProveedor.Name = "lblProveedor";
             lblProveedor.Size = new Size(103, 28);
             lblProveedor.TabIndex = 16;
@@ -262,7 +243,7 @@
             // txtDescripcion
             // 
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
-            txtDescripcion.Location = new Point(114, 196);
+            txtDescripcion.Location = new Point(114, 203);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(260, 27);
@@ -273,7 +254,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = Color.FromArgb(52, 73, 94);
-            label1.Location = new Point(402, 129);
+            label1.Location = new Point(402, 148);
             label1.Name = "label1";
             label1.Size = new Size(97, 28);
             label1.TabIndex = 19;
@@ -284,11 +265,12 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Symbol", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.FromArgb(44, 62, 80);
-            label5.Location = new Point(299, 13);
+            label5.Location = new Point(374, 15);
             label5.Name = "label5";
             label5.Size = new Size(294, 41);
             label5.TabIndex = 54;
             label5.Text = "Stock de Productos";
+            label5.Click += label5_Click;
             // 
             // panel1
             // 
@@ -311,12 +293,10 @@
             panel1.Controls.Add(numStock);
             panel1.Controls.Add(lblProveedor);
             panel1.Controls.Add(txtNombreProducto);
-            panel1.Controls.Add(lblUnidadMedida);
             panel1.Controls.Add(lblDescripcion);
             panel1.Controls.Add(lblStock);
             panel1.Controls.Add(cmbCategoria);
             panel1.Controls.Add(cmbProveedor);
-            panel1.Controls.Add(txtUnidadMedida);
             panel1.Controls.Add(lblPrecioUnitario);
             panel1.Controls.Add(numPrecioUnitario);
             panel1.Location = new Point(14, 16);
@@ -324,13 +304,14 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1009, 384);
             panel1.TabIndex = 55;
+            panel1.Paint += panel1_Paint;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
             label4.ForeColor = Color.FromArgb(52, 73, 94);
-            label4.Location = new Point(895, 303);
+            label4.Location = new Point(877, 309);
             label4.Name = "label4";
             label4.Size = new Size(113, 28);
             label4.TabIndex = 60;
@@ -341,7 +322,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Symbol", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(44, 62, 80);
-            label3.Location = new Point(409, 260);
+            label3.Location = new Point(374, 268);
             label3.Name = "label3";
             label3.Size = new Size(632, 41);
             label3.TabIndex = 59;
@@ -352,7 +333,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
             label2.ForeColor = Color.FromArgb(52, 73, 94);
-            label2.Location = new Point(341, 344);
+            label2.Location = new Point(355, 331);
             label2.Name = "label2";
             label2.Size = new Size(17, 28);
             label2.TabIndex = 58;
@@ -363,7 +344,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F);
             label7.ForeColor = Color.FromArgb(52, 73, 94);
-            label7.Location = new Point(205, 343);
+            label7.Location = new Point(219, 329);
             label7.Name = "label7";
             label7.Size = new Size(17, 28);
             label7.TabIndex = 57;
@@ -375,7 +356,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F);
             label6.ForeColor = Color.FromArgb(52, 73, 94);
-            label6.Location = new Point(3, 349);
+            label6.Location = new Point(18, 336);
             label6.Name = "label6";
             label6.Size = new Size(98, 28);
             label6.TabIndex = 56;
@@ -384,7 +365,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.hr;
-            pictureBox1.Location = new Point(23, 13);
+            pictureBox1.Location = new Point(11, 8);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(79, 93);
@@ -421,7 +402,6 @@
         private NumericUpDown numPrecioUnitario;
         private Label lblPrecioUnitario;
         private ComboBox cmbProveedor;
-        private TextBox txtUnidadMedida;
         private Label lblStock;
         private ComboBox cmbCategoria;
         private Label lblCategoria;
@@ -430,7 +410,6 @@
         private Button btnEliminar;
         private DataGridView dgvProductos;
         private NumericUpDown numStock;
-        private Label lblUnidadMedida;
         private Label lblProveedor;
         private TextBox txtDescripcion;
         private Label label1;
