@@ -13,12 +13,15 @@ namespace ProyectodeferrerMaster.Interfaces
             InitializeComponent();
             CargarVentas();
             CargarClientes();
-        }
+			CargarProductos();
+		}
         private void Limpiar()
         {
             txtTotal.Clear();
             cmbCliente.SelectedIndex = -1;
-            dtpFechaVenta.Value = DateTime.Now;
+			cmbProducto.SelectedIndex = -1;
+			txtCantidad.Clear();
+			dtpFechaVenta.Value = DateTime.Now;
             isEditMode = false;
             ventaId = 0;
         }
@@ -32,7 +35,19 @@ namespace ProyectodeferrerMaster.Interfaces
                 cmbCliente.ValueMember = "IdCliente"; // Usa el ID como valor
             }
         }
-        private void CargarVentas()
+
+		private void CargarProductos()
+		{
+			using (var context = new ApplicationDbContext())
+			{
+				var productos = context.Productos.ToList();
+				cmbProducto.DataSource = productos;
+				cmbProducto.DisplayMember = "NombreProducto";
+				cmbProducto.ValueMember = "IdProducto";
+			}
+		}
+
+		private void CargarVentas()
         {
             using (var context = new ApplicationDbContext())
             {
@@ -42,8 +57,10 @@ namespace ProyectodeferrerMaster.Interfaces
                         v.IdVenta,
                         v.IdCliente,
                         v.FechaVenta,
-                        v.Total
-                    })
+                        v.Total,
+						v.IdProducto,
+						v.Cantidad
+					})
                     .ToList();
                 dgvDetalleVenta.DataSource = ventas;
             }
@@ -54,56 +71,70 @@ namespace ProyectodeferrerMaster.Interfaces
             Limpiar();
         }
 
-        private void Ventas_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvDetalleVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
-        private void txtTotal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            using (var context = new ApplicationDbContext())
-            {
-                if (isEditMode)
-                {
-                    var venta = context.Ventas.Find(ventaId);
+			using (var context = new ApplicationDbContext())
+			{
+				int idProducto = (int)cmbProducto.SelectedValue;
+				int cantidad = int.Parse(txtCantidad.Text);
 
-                    if (venta != null)
-                    {
-                        venta.IdCliente = (int)cmbCliente.SelectedValue;
-                        venta.FechaVenta = dtpFechaVenta.Value;
-                        venta.Total = decimal.Parse(txtTotal.Text);
+				// Obtener el producto y verificar el stock
+				var producto = context.Productos.Find(idProducto);
+				if (producto == null)
+				{
+					MessageBox.Show("Producto no encontrado.");
+					return;
+				}
 
-                        context.SaveChanges();
-                        MessageBox.Show("Venta actualizada exitosamente.");
-                    }
-                }
-                else
-                {
-                    var nuevaVenta = new Venta
-                    {
-                        IdCliente = (int)cmbCliente.SelectedValue,
-                        FechaVenta = dtpFechaVenta.Value,
-                        Total = decimal.Parse(txtTotal.Text)
-                    };
+				if (producto.Stock < cantidad)
+				{
+					MessageBox.Show("Stock insuficiente para completar la venta.");
+					return;
+				}
 
-                    context.Ventas.Add(nuevaVenta);
-                    context.SaveChanges();
-                    MessageBox.Show("Venta guardada exitosamente.");
-                }
+				if (isEditMode)
+				{
+					var venta = context.Ventas.Find(ventaId);
+					if (venta != null)
+					{
+						venta.IdCliente = (int)cmbCliente.SelectedValue;
+						venta.FechaVenta = dtpFechaVenta.Value;
+						venta.Total = decimal.Parse(txtTotal.Text);
+						venta.IdProducto = idProducto;
+						venta.Cantidad = cantidad;
+						venta.PrecioUnitario = (int)producto.PrecioUnitario;
 
-                Limpiar();
-                CargarVentas();
-            }
-        }
+						// Reducir el stock del producto
+						producto.Stock -= cantidad;
+
+						context.SaveChanges();
+						MessageBox.Show("Venta actualizada exitosamente.");
+					}
+				}
+				else
+				{
+					var nuevaVenta = new Venta
+					{
+						IdCliente = (int)cmbCliente.SelectedValue,
+						FechaVenta = dtpFechaVenta.Value,
+						Total = decimal.Parse(txtTotal.Text),
+						IdProducto = idProducto,
+						Cantidad = cantidad,
+						PrecioUnitario = (int)producto.PrecioUnitario
+					};
+
+					// Reducir el stock del producto
+					producto.Stock -= cantidad;
+
+					context.Ventas.Add(nuevaVenta);
+					context.SaveChanges();
+					MessageBox.Show("Venta guardada exitosamente.");
+				}
+
+				Limpiar();
+				CargarVentas();
+			}
+		}
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -145,29 +176,20 @@ namespace ProyectodeferrerMaster.Interfaces
             }
         }
 
-
-        private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpFechaVenta_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvDetalleVenta_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvDetalleVenta.Rows[e.RowIndex];
 
-                // Llenar los campos con los datos seleccionados
-                cmbCliente.SelectedValue = row.Cells["IdCliente"].Value;
-                dtpFechaVenta.Value = Convert.ToDateTime(row.Cells["FechaVenta"].Value);
-                txtTotal.Text = row.Cells["Total"].Value.ToString();
+				// Llenar los campos con los datos seleccionados
+				cmbCliente.SelectedValue = row.Cells["IdCliente"].Value;
+				cmbProducto.SelectedValue = row.Cells["IdProducto"].Value;
+				dtpFechaVenta.Value = Convert.ToDateTime(row.Cells["FechaVenta"].Value);
+				txtCantidad.Text = row.Cells["Cantidad"].Value.ToString();
+				txtTotal.Text = row.Cells["Total"].Value.ToString();
 
-                ventaId = Convert.ToInt32(row.Cells["IdVenta"].Value);
+				ventaId = Convert.ToInt32(row.Cells["IdVenta"].Value);
                 isEditMode = true;
             }
         }
