@@ -266,11 +266,14 @@ namespace ProyectodeferrerMaster.Interfaces
                     filas += "<td>" + row.Cells["NombreProveedor"].Value?.ToString() + "</td>";
 
                     filas += "</tr>"; // Cierra la fila
+                    Console.WriteLine(filas);
                 }
             }
 
             // Reemplazar el marcador de filas en la plantilla HTML
             paginahtml_text = paginahtml_text.Replace("@FILAS", filas);
+            Console.WriteLine(paginahtml_text);
+
 
             // Configurar el flag para la etiqueta <td>
             HtmlAgilityPack.HtmlNode.ElementsFlags["td"] = HtmlAgilityPack.HtmlElementFlag.Closed;
