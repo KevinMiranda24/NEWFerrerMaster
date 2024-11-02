@@ -245,20 +245,29 @@ namespace ProyectodeferrerMaster.Interfaces
             SaveFileDialog guardar = new SaveFileDialog();
             guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + "_Productos.pdf"; // Usar formato de nombre de archivo sin barras
 
-            // Plantilla HTML base para el reporte
+            // Cargar la plantilla HTML base para el reporte
             string paginahtml_text = Properties.Resources.Plantilla1.ToString();
 
-            // Inicializar string para las filas del DataGridView
-            string filas = string.Empty;
+            // Configurar valores para los marcadores de cliente, documento y fecha
+            string cliente = "Cliente Ejemplo"; // Aquí puedes colocar el nombre del cliente real
+            string documento = "12345678";      // Documento de ejemplo; reemplaza por el valor real
+            string fecha = DateTime.Now.ToString("dd/MM/yyyy");
 
-            // Recorrer las filas del DataGridView y agregar cada una en formato HTML
+            // Reemplazar los marcadores en la plantilla
+            paginahtml_text = paginahtml_text.Replace("@Cliente", cliente);
+            paginahtml_text = paginahtml_text.Replace("@Documento", documento);
+            paginahtml_text = paginahtml_text.Replace("@Fecha", fecha);
+
+            // Construir las filas del DataGridView en formato HTML
+            string filas = string.Empty;
             foreach (DataGridViewRow row in dgvProductos.Rows)
             {
                 if (!row.IsNewRow) // Evitar la fila vacía al final
                 {
                     filas += "<tr>"; // Comienza una nueva fila
 
-                    filas += "<td>" + row.Cells["NombreProducto"].Value?.ToString() + "</td>";
+                    // Llenar las celdas de acuerdo con los nombres de columna del DataGridView
+                    filas += "<td>" + row.Cells["NombreProducto"].Value.ToString() + "</td>";
                     filas += "<td>" + row.Cells["Descripcion"].Value?.ToString() + "</td>";
                     filas += "<td>" + row.Cells["PrecioUnitario"].Value?.ToString() + "</td>";
                     filas += "<td>" + row.Cells["Stock"].Value?.ToString() + "</td>";
@@ -266,14 +275,11 @@ namespace ProyectodeferrerMaster.Interfaces
                     filas += "<td>" + row.Cells["NombreProveedor"].Value?.ToString() + "</td>";
 
                     filas += "</tr>"; // Cierra la fila
-                    Console.WriteLine(filas);
                 }
             }
 
             // Reemplazar el marcador de filas en la plantilla HTML
-            paginahtml_text = paginahtml_text.Replace("@FILAS", filas);
-            Console.WriteLine(paginahtml_text);
-
+            paginahtml_text = paginahtml_text.Replace("@Filas", filas);
 
             // Configurar el flag para la etiqueta <td>
             HtmlAgilityPack.HtmlNode.ElementsFlags["td"] = HtmlAgilityPack.HtmlElementFlag.Closed;
