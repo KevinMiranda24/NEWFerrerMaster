@@ -243,52 +243,38 @@ namespace ProyectodeferrerMaster.Interfaces
         private void btnRepProductos_Click(object sender, EventArgs e)
         {
             SaveFileDialog guardar = new SaveFileDialog();
-            guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + "_Productos.pdf"; // Usar formato de nombre de archivo sin barras
+            guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + "_Productos.pdf";
 
-            // Cargar la plantilla HTML base para el reporte
             string paginahtml_text = Properties.Resources.Plantilla1.ToString();
-
-            // Configurar valores para los marcadores de cliente, documento y fecha
-            string cliente = "Cliente Ejemplo"; // Aquí puedes colocar el nombre del cliente real
-            string documento = "12345678";      // Documento de ejemplo; reemplaza por el valor real
+            string cliente = "Cliente Ejemplo";
+            string documento = "12345678";
             string fecha = DateTime.Now.ToString("dd/MM/yyyy");
 
-            // Reemplazar los marcadores en la plantilla
             paginahtml_text = paginahtml_text.Replace("@Cliente", cliente);
             paginahtml_text = paginahtml_text.Replace("@Documento", documento);
             paginahtml_text = paginahtml_text.Replace("@Fecha", fecha);
 
-            // Construir las filas del DataGridView en formato HTML
             string filas = string.Empty;
             foreach (DataGridViewRow row in dgvProductos.Rows)
             {
-                if (!row.IsNewRow) // Evitar la fila vacía al final
+                if (!row.IsNewRow)
                 {
-                    filas += "<tr>"; // Comienza una nueva fila
-
-                    // Llenar las celdas de acuerdo con los nombres de columna del DataGridView
+                    filas += "<tr>";
                     filas += "<td>" + row.Cells["NombreProducto"].Value.ToString() + "</td>";
                     filas += "<td>" + row.Cells["Descripcion"].Value?.ToString() + "</td>";
                     filas += "<td>" + row.Cells["PrecioUnitario"].Value?.ToString() + "</td>";
                     filas += "<td>" + row.Cells["Stock"].Value?.ToString() + "</td>";
                     filas += "<td>" + row.Cells["CategoriaProducto"].Value?.ToString() + "</td>";
                     filas += "<td>" + row.Cells["NombreProveedor"].Value?.ToString() + "</td>";
-
-                    filas += "</tr>"; // Cierra la fila
+                    filas += "</tr>";
                 }
             }
 
-            // Reemplazar el marcador de filas en la plantilla HTML
             paginahtml_text = paginahtml_text.Replace("@Filas", filas);
 
-            // Configurar el flag para la etiqueta <td>
             HtmlAgilityPack.HtmlNode.ElementsFlags["td"] = HtmlAgilityPack.HtmlElementFlag.Closed;
-
-            // Crear un documento HTML
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(paginahtml_text); // Cargar el HTML
-
-            // Convertir el HTML limpio de vuelta a cadena
+            doc.LoadHtml(paginahtml_text);
             paginahtml_text = doc.DocumentNode.OuterHtml;
 
             if (guardar.ShowDialog() == DialogResult.OK)
@@ -298,6 +284,14 @@ namespace ProyectodeferrerMaster.Interfaces
                     Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
                     PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
                     pdfDoc.Open();
+
+                    // Convertir la imagen a bytes y agregarla al PDF
+                    byte[] imageBytes = (byte[])new ImageConverter().ConvertTo(Properties.Resources.FerreMaster, typeof(byte[]));
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(imageBytes);
+                    img.ScaleToFit(80, 60);
+                    img.Alignment = iTextSharp.text.Image.UNDERLYING;
+                    img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
+                    pdfDoc.Add(img);
 
                     using (StringReader sr = new StringReader(paginahtml_text))
                     {
@@ -310,6 +304,7 @@ namespace ProyectodeferrerMaster.Interfaces
                 MessageBox.Show("Reporte PDF generado exitosamente.");
             }
         }
+
     }
 }
 
