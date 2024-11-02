@@ -37,6 +37,7 @@
             gestiónDeProveedoresToolStripMenuItem = new ToolStripMenuItem();
             reportesToolStripMenuItem = new ToolStripMenuItem();
             label2 = new Label();
+            generarReportesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { clientesToolStripMenuItem1, categoriaToolStripMenuItem, ventasToolStripMenuItem1, clientesToolStripMenuItem, ventasToolStripMenuItem, proveedoresToolStripMenuItem, reportesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1125, 40);
+            menuStrip1.Size = new Size(1125, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -69,14 +70,14 @@
             clientesToolStripMenuItem1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             clientesToolStripMenuItem1.ForeColor = Color.FromArgb(44, 62, 80);
             clientesToolStripMenuItem1.Name = "clientesToolStripMenuItem1";
-            clientesToolStripMenuItem1.Size = new Size(113, 36);
+            clientesToolStripMenuItem1.Size = new Size(91, 29);
             clientesToolStripMenuItem1.Text = "Clientes";
             clientesToolStripMenuItem1.Click += clientesToolStripMenuItem1_Click;
             // 
             // clientesToolStripMenuItem2
             // 
             clientesToolStripMenuItem2.Name = "clientesToolStripMenuItem2";
-            clientesToolStripMenuItem2.Size = new Size(187, 36);
+            clientesToolStripMenuItem2.Size = new Size(151, 30);
             clientesToolStripMenuItem2.Text = "Clientes";
             clientesToolStripMenuItem2.Click += clientesToolStripMenuItem2_Click;
             // 
@@ -87,13 +88,13 @@
             categoriaToolStripMenuItem.Font = new Font("Segoe UI", 14.25F);
             categoriaToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             categoriaToolStripMenuItem.Name = "categoriaToolStripMenuItem";
-            categoriaToolStripMenuItem.Size = new Size(130, 36);
+            categoriaToolStripMenuItem.Size = new Size(106, 29);
             categoriaToolStripMenuItem.Text = "Categoria";
             // 
             // tiposDeCategoriasToolStripMenuItem
             // 
             tiposDeCategoriasToolStripMenuItem.Name = "tiposDeCategoriasToolStripMenuItem";
-            tiposDeCategoriasToolStripMenuItem.Size = new Size(308, 36);
+            tiposDeCategoriasToolStripMenuItem.Size = new Size(247, 30);
             tiposDeCategoriasToolStripMenuItem.Text = "Tipos de categorias";
             tiposDeCategoriasToolStripMenuItem.Click += tiposDeCategoriasToolStripMenuItem_Click;
             // 
@@ -104,13 +105,13 @@
             ventasToolStripMenuItem1.Font = new Font("Segoe UI", 14.25F);
             ventasToolStripMenuItem1.ForeColor = Color.FromArgb(44, 62, 80);
             ventasToolStripMenuItem1.Name = "ventasToolStripMenuItem1";
-            ventasToolStripMenuItem1.Size = new Size(122, 36);
+            ventasToolStripMenuItem1.Size = new Size(99, 29);
             ventasToolStripMenuItem1.Text = "Compras";
             // 
             // comprasToolStripMenuItem
             // 
             comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
-            comprasToolStripMenuItem.Size = new Size(192, 36);
+            comprasToolStripMenuItem.Size = new Size(156, 30);
             comprasToolStripMenuItem.Text = "compras";
             comprasToolStripMenuItem.Click += comprasToolStripMenuItem_Click;
             // 
@@ -121,13 +122,13 @@
             clientesToolStripMenuItem.Font = new Font("Segoe UI", 14.25F);
             clientesToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(134, 36);
+            clientesToolStripMenuItem.Size = new Size(109, 29);
             clientesToolStripMenuItem.Text = "Productos";
             // 
             // productosToolStripMenuItem
             // 
             productosToolStripMenuItem.Name = "productosToolStripMenuItem";
-            productosToolStripMenuItem.Size = new Size(208, 36);
+            productosToolStripMenuItem.Size = new Size(169, 30);
             productosToolStripMenuItem.Text = "Productos";
             productosToolStripMenuItem.Click += productosToolStripMenuItem_Click;
             // 
@@ -138,13 +139,13 @@
             ventasToolStripMenuItem.Font = new Font("Segoe UI", 14.25F);
             ventasToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
-            ventasToolStripMenuItem.Size = new Size(135, 36);
+            ventasToolStripMenuItem.Size = new Size(109, 29);
             ventasToolStripMenuItem.Text = "Inventario";
             // 
             // inventariosToolStripMenuItem
             // 
             inventariosToolStripMenuItem.Name = "inventariosToolStripMenuItem";
-            inventariosToolStripMenuItem.Size = new Size(219, 36);
+            inventariosToolStripMenuItem.Size = new Size(177, 30);
             inventariosToolStripMenuItem.Text = "Inventarios";
             inventariosToolStripMenuItem.Click += inventariosToolStripMenuItem_Click;
             // 
@@ -155,23 +156,24 @@
             proveedoresToolStripMenuItem.Font = new Font("Segoe UI", 14.25F);
             proveedoresToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
-            proveedoresToolStripMenuItem.Size = new Size(160, 36);
+            proveedoresToolStripMenuItem.Size = new Size(129, 29);
             proveedoresToolStripMenuItem.Text = "Proveedores";
             // 
             // gestiónDeProveedoresToolStripMenuItem
             // 
             gestiónDeProveedoresToolStripMenuItem.Name = "gestiónDeProveedoresToolStripMenuItem";
-            gestiónDeProveedoresToolStripMenuItem.Size = new Size(356, 36);
+            gestiónDeProveedoresToolStripMenuItem.Size = new Size(284, 30);
             gestiónDeProveedoresToolStripMenuItem.Text = "Gestión de Proveedores";
             gestiónDeProveedoresToolStripMenuItem.Click += gestiónDeProveedoresToolStripMenuItem_Click;
             // 
             // reportesToolStripMenuItem
             // 
             reportesToolStripMenuItem.BackColor = SystemColors.ButtonFace;
+            reportesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { generarReportesToolStripMenuItem });
             reportesToolStripMenuItem.Font = new Font("Segoe UI", 14.25F);
             reportesToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
             reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            reportesToolStripMenuItem.Size = new Size(121, 36);
+            reportesToolStripMenuItem.Size = new Size(97, 29);
             reportesToolStripMenuItem.Text = "Reportes";
             // 
             // label2
@@ -180,9 +182,16 @@
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(930, 5);
             label2.Name = "label2";
-            label2.Size = new Size(161, 32);
+            label2.Size = new Size(127, 25);
             label2.TabIndex = 1;
             label2.Text = "FerrerMaster";
+            // 
+            // generarReportesToolStripMenuItem
+            // 
+            generarReportesToolStripMenuItem.Name = "generarReportesToolStripMenuItem";
+            generarReportesToolStripMenuItem.Size = new Size(230, 30);
+            generarReportesToolStripMenuItem.Text = "Generar Reportes";
+            generarReportesToolStripMenuItem.Click += generarReportesToolStripMenuItem_Click;
             // 
             // Inicio1
             // 
@@ -216,5 +225,6 @@
         private ToolStripMenuItem categoriaToolStripMenuItem;
         private ToolStripMenuItem tiposDeCategoriasToolStripMenuItem;
         private ToolStripMenuItem gestiónDeProveedoresToolStripMenuItem;
+        private ToolStripMenuItem generarReportesToolStripMenuItem;
     }
 }

@@ -1,4 +1,10 @@
 ﻿using ProyectodeferrerMaster.Modelos;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using HtmlAgilityPack;
 
 namespace ProyectodeferrerMaster.Interfaces
 {
@@ -233,5 +239,68 @@ namespace ProyectodeferrerMaster.Interfaces
         {
 
         }
+
+        private void btnRepProductos_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog guardar = new SaveFileDialog();
+            guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + "_Productos.pdf"; // Usar formato de nombre de archivo sin barras
+
+            // Plantilla HTML base para el reporte
+            string paginahtml_text = Properties.Resources.Plantilla1.ToString();
+
+            // Inicializar string para las filas del DataGridView
+            string filas = string.Empty;
+
+            // Recorrer las filas del DataGridView y agregar cada una en formato HTML
+            foreach (DataGridViewRow row in dgvProductos.Rows)
+            {
+                if (!row.IsNewRow) // Evitar la fila vacía al final
+                {
+                    filas += "<tr>"; // Comienza una nueva fila
+
+                    filas += "<td>" + row.Cells["NombreProducto"].Value?.ToString() + "</td>";
+                    filas += "<td>" + row.Cells["Descripcion"].Value?.ToString() + "</td>";
+                    filas += "<td>" + row.Cells["PrecioUnitario"].Value?.ToString() + "</td>";
+                    filas += "<td>" + row.Cells["Stock"].Value?.ToString() + "</td>";
+                    filas += "<td>" + row.Cells["CategoriaProducto"].Value?.ToString() + "</td>";
+                    filas += "<td>" + row.Cells["NombreProveedor"].Value?.ToString() + "</td>";
+
+                    filas += "</tr>"; // Cierra la fila
+                }
+            }
+
+            // Reemplazar el marcador de filas en la plantilla HTML
+            paginahtml_text = paginahtml_text.Replace("@FILAS", filas);
+
+            // Configurar el flag para la etiqueta <td>
+            HtmlAgilityPack.HtmlNode.ElementsFlags["td"] = HtmlAgilityPack.HtmlElementFlag.Closed;
+
+            // Crear un documento HTML
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(paginahtml_text); // Cargar el HTML
+
+            // Convertir el HTML limpio de vuelta a cadena
+            paginahtml_text = doc.DocumentNode.OuterHtml;
+
+            if (guardar.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                {
+                    Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+
+                    using (StringReader sr = new StringReader(paginahtml_text))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                    }
+
+                    pdfDoc.Close();
+                    stream.Close();
+                }
+                MessageBox.Show("Reporte PDF generado exitosamente.");
+            }
+        }
     }
 }
+

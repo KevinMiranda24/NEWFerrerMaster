@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page Design</title>
+    <style>
+        table.border {
+            border-collapse: collapse;
+        }
+
+        table.border th, table.border td {
+             padding: 5px;
+             border: 1px solid black;
+        }
+
+        .header-table td {
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+            <td style="width:20%"></td>
+            <td style="width:60%" align="center">
+                <table class="header-table">
+                    <tr><td align="center">FerreMaster</td></tr>
+                    <tr><td align="center">Dirección: Av. prueba 24</td></tr>
+                    <tr><td align="center">Teléfono: 2563-6519</td></tr>
+                </table>
+            </td>
+            <td style="width:20%">
+                <table class="border" style="width:100%">
+                    <tr><td align="center">RUC: 032152</td></tr>
+                    <tr><td align="center">Boleta</td></tr>
+                    <tr><td align="center">Nro: 000012</td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr><td colspan="3" height="20"></td></tr>
+        <tr>
+            <td colspan="2">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:20%">Cliente:</td>
+                        <td style="width:80%; border-bottom: 1px solid black;">@Cliente</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">Documento:</td>
+                        <td style="width:30%; border-bottom: 1px solid black;">@Documento</td>
+                        <td style="width:10%">Fecha:</td>
+                        <td style="width:40%; border-bottom: 1px solid black;">@Fecha</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr><td colspan="3" height="20"></td></tr>
+
+        <tr>
+            <td colspan="3">
+                <table class="border" style="width:100%">
+                    <thead style="background-color:#D8D8D8">
+                        <tr>
+                            <th>NombreProducto</th>
+                            <th>Descripcion</th>
+                            <th>PrecioUnitario</th>
+                            <th>Stock</th>
+                            <th>CategoriaProducto</th>
+                            <th>NombreProveedor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Filas
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 namespace ProyectodeferrerMaster.Interfaces
 {
-	public partial class UsuarioForm : Form
+    public partial class UsuarioForm : Form
     {
         public UsuarioForm()
         {
@@ -181,6 +181,11 @@ namespace ProyectodeferrerMaster.Interfaces
         private void bntSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

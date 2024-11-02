@@ -1,6 +1,6 @@
 ﻿namespace ProyectodeferrerMaster.Interfaces
 {
-	public partial class Inicio1 : Form
+    public partial class Inicio1 : Form
     {
 
         // Constructor que recibe el token del login
@@ -141,6 +141,24 @@
             {
                 // Si ya está abierto, traemos el formulario al frente
                 formProveedor.BringToFront();
+            }
+        }
+
+        private void generarReportesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reportes formReporte = Application.OpenForms.OfType<Reportes>().FirstOrDefault();
+
+            if (formReporte == null)
+            {
+                // Si no está abierto, lo instanciamos y lo mostramos
+                formReporte = new Reportes();
+                formReporte.MdiParent = this;  // Asigna el formulario principal como contenedor MDI
+                formReporte.Show();
+            }
+            else
+            {
+                // Si ya está abierto, traemos el formulario al frente
+                formReporte.BringToFront();
             }
         }
     }
