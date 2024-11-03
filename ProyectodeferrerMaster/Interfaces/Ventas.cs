@@ -1,5 +1,11 @@
-﻿using ProyectodeferrerMaster.Modelos;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
+using ProyectodeferrerMaster.Modelos;
 using System.Data;
+using System.IO;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using HtmlAgilityPack;
 
 namespace ProyectodeferrerMaster.Interfaces
 {
@@ -51,31 +57,31 @@ namespace ProyectodeferrerMaster.Interfaces
         {
             using (var context = new ApplicationDbContext())
             {
-				var ventas = context.Ventas
-			.Join(context.Clientes,
-				  v => v.IdCliente,
-				  c => c.IdCliente,
-				  (v, c) => new { Venta = v, Cliente = c })
-			.Join(context.Productos,
-				  vc => vc.Venta.IdProducto,
-				  p => p.IdProducto,
-				  (vc, p) => new
-				  {
-					  vc.Venta.IdVenta,
-					  Cliente = vc.Cliente.NombreCliente,  // Nombre del cliente
-					  Producto = p.NombreProducto,         // Nombre del producto
-					  vc.Venta.Cantidad,
-					  vc.Venta.Total,
-					  vc.Venta.FechaVenta
-				  })
-			.ToList();
+                var ventas = context.Ventas
+            .Join(context.Clientes,
+                  v => v.IdCliente,
+                  c => c.IdCliente,
+                  (v, c) => new { Venta = v, Cliente = c })
+            .Join(context.Productos,
+                  vc => vc.Venta.IdProducto,
+                  p => p.IdProducto,
+                  (vc, p) => new
+                  {
+                      vc.Venta.IdVenta,
+                      Cliente = vc.Cliente.NombreCliente,  // Nombre del cliente
+                      Producto = p.NombreProducto,         // Nombre del producto
+                      vc.Venta.Cantidad,
+                      vc.Venta.Total,
+                      vc.Venta.FechaVenta
+                  })
+            .ToList();
 
-				dgvDetalleVenta.DataSource = ventas;
+                dgvDetalleVenta.DataSource = ventas;
 
-				// Cambiar los encabezados de las columnas si es necesario
-				dgvDetalleVenta.Columns["Cliente"].HeaderText = "Nombre del Cliente";
-				dgvDetalleVenta.Columns["Producto"].HeaderText = "Nombre del Producto";
-			}
+                // Cambiar los encabezados de las columnas si es necesario
+                dgvDetalleVenta.Columns["Cliente"].HeaderText = "Nombre del Cliente";
+                dgvDetalleVenta.Columns["Producto"].HeaderText = "Nombre del Producto";
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -211,7 +217,102 @@ namespace ProyectodeferrerMaster.Interfaces
             this.Close();
         }
 
+        //boton para crear reportes
         private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog guardar = new SaveFileDialog();
+            guardar.FileName = DateTime.Now.ToString("dd_MM_yyyy") + "_ReporteGeneral.pdf";
+
+            // Verificar que la plantilla HTML exista
+            string paginaHtml = Properties.Resources.PlantillaVentas?.ToString();
+            if (paginaHtml == null)
+            {
+                MessageBox.Show("La plantilla HTML no se encontró en los recursos.");
+                return;
+            }
+
+            // Configurar valores para los marcadores de título, documento y fecha
+            string titulo = "Todos los Clientes";  // Puedes cambiar este título según el tipo de reporte
+            string numeroDocumento = "98765432";          // Ejemplo de número de documento
+            string fechaActual = DateTime.Now.ToString("dd/MM/yyyy");
+
+            // Reemplazar los marcadores en la plantilla HTML
+            paginaHtml = paginaHtml.Replace("@Cliente", titulo);
+            paginaHtml = paginaHtml.Replace("@Fecha", fechaActual);
+
+            // Verificar que el DataGridView tenga filas
+            if (dgvDetalleVenta.Rows == null || dgvDetalleVenta.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay datos para generar el reporte.");
+                return;
+            }
+
+            // Construir las filas del DataGridView en formato HTML
+            string filasHtml = string.Empty;
+            foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    filasHtml += "<tr>";
+                    filasHtml += "<td>" + row.Cells["IdVenta"].Value?.ToString() + "</td>";
+                    filasHtml += "<td>" + row.Cells["Cliente"].Value?.ToString() + "</td>";
+                    filasHtml += "<td>" + row.Cells["Producto"].Value?.ToString() + "</td>";
+                    filasHtml += "<td>" + row.Cells["Cantidad"].Value?.ToString() + "</td>";
+                    filasHtml += "<td>" + row.Cells["Total"].Value?.ToString() + "</td>";
+                    filasHtml += "</tr>";
+                }
+            }
+
+            paginaHtml = paginaHtml.Replace("@Filas", filasHtml);
+
+            // Configurar el flag para la etiqueta <td>
+            HtmlAgilityPack.HtmlNode.ElementsFlags["td"] = HtmlAgilityPack.HtmlElementFlag.Closed;
+
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(paginaHtml);
+            paginaHtml = doc.DocumentNode.OuterHtml;
+
+            // Guardar el archivo PDF
+            if (guardar.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                {
+                    Document pdfDocu = new Document(PageSize.A4, 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDocu, stream);
+                    pdfDocu.Open();
+
+                    // Verificar que la imagen existe antes de usarla
+                    byte[] imageBytes = (byte[])new ImageConverter().ConvertTo(Properties.Resources.FerreMaster, typeof(byte[]));
+
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(imageBytes);
+                    img.ScaleToFit(80, 60);
+                    img.SetAbsolutePosition(pdfDocu.LeftMargin, pdfDocu.Top - 60);
+                    pdfDocu.Add(img);
+
+                    // Agregar el contenido HTML al PDF
+                    try
+                    {
+                        using (StringReader sr = new StringReader(paginaHtml))
+                        {
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDocu, sr);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al generar el PDF: " + ex.Message);
+                    }
+
+
+                    pdfDocu.Close();
+                    stream.Close();
+                }
+                MessageBox.Show("Reporte PDF generado exitosamente.");
+            }
+        }
+
+
+
+        private void dgvDetalleVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

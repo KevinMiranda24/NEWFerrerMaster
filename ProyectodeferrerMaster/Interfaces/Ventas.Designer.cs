@@ -179,6 +179,7 @@
             dgvDetalleVenta.Size = new Size(707, 178);
             dgvDetalleVenta.TabIndex = 10;
             dgvDetalleVenta.CellClick += dgvDetalleVenta_CellClick;
+            dgvDetalleVenta.CellContentClick += dgvDetalleVenta_CellContentClick;
             // 
             // cmbProducto
             // 

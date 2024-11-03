@@ -35,9 +35,9 @@
             inventariosToolStripMenuItem = new ToolStripMenuItem();
             proveedoresToolStripMenuItem = new ToolStripMenuItem();
             gestiónDeProveedoresToolStripMenuItem = new ToolStripMenuItem();
-            label2 = new Label();
             empleadosToolStripMenuItem = new ToolStripMenuItem();
             gestiónDeEmpleadosToolStripMenuItem = new ToolStripMenuItem();
+            label2 = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,7 +77,7 @@
             // clientesToolStripMenuItem2
             // 
             clientesToolStripMenuItem2.Name = "clientesToolStripMenuItem2";
-            clientesToolStripMenuItem2.Size = new Size(180, 30);
+            clientesToolStripMenuItem2.Size = new Size(151, 30);
             clientesToolStripMenuItem2.Text = "Clientes";
             clientesToolStripMenuItem2.Click += clientesToolStripMenuItem2_Click;
             // 
@@ -111,7 +111,7 @@
             // comprasToolStripMenuItem
             // 
             comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
-            comprasToolStripMenuItem.Size = new Size(180, 30);
+            comprasToolStripMenuItem.Size = new Size(156, 30);
             comprasToolStripMenuItem.Text = "compras";
             comprasToolStripMenuItem.Click += comprasToolStripMenuItem_Click;
             // 
@@ -145,7 +145,7 @@
             // inventariosToolStripMenuItem
             // 
             inventariosToolStripMenuItem.Name = "inventariosToolStripMenuItem";
-            inventariosToolStripMenuItem.Size = new Size(180, 30);
+            inventariosToolStripMenuItem.Size = new Size(177, 30);
             inventariosToolStripMenuItem.Text = "Inventarios";
             inventariosToolStripMenuItem.Click += inventariosToolStripMenuItem_Click;
             // 
@@ -166,16 +166,6 @@
             gestiónDeProveedoresToolStripMenuItem.Text = "Gestión de Proveedores";
             gestiónDeProveedoresToolStripMenuItem.Click += gestiónDeProveedoresToolStripMenuItem_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(930, 5);
-            label2.Name = "label2";
-            label2.Size = new Size(127, 25);
-            label2.TabIndex = 1;
-            label2.Text = "FerrerMaster";
-            // 
             // empleadosToolStripMenuItem
             // 
             empleadosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gestiónDeEmpleadosToolStripMenuItem });
@@ -192,9 +182,19 @@
             gestiónDeEmpleadosToolStripMenuItem.Text = "Gestión de empleados";
             gestiónDeEmpleadosToolStripMenuItem.Click += gestiónDeEmpleadosToolStripMenuItem_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(930, 5);
+            label2.Name = "label2";
+            label2.Size = new Size(127, 25);
+            label2.TabIndex = 1;
+            label2.Text = "FerrerMaster";
+            // 
             // Inicio1
             // 
-            ClientSize = new Size(1125, 498);
+            ClientSize = new Size(1125, 663);
             Controls.Add(label2);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;

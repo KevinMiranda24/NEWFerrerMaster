@@ -163,26 +163,6 @@ namespace ProyectodeferrerMaster.Properties {
         }
         
         /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap provee {
-            get {
-                object obj = ResourceManager.GetObject("provee", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ventas {
-            get {
-                object obj = ResourceManager.GetObject("ventas", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -208,9 +188,29 @@ namespace ProyectodeferrerMaster.Properties {
         ///            &lt;td style=&quot;width:20%&quot;&gt;&lt;/td&gt;
         ///            &lt;td style=&quot;width [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string Ventas1 {
+        internal static string PlantillaVentas {
             get {
-                return ResourceManager.GetString("Ventas1", resourceCulture);
+                return ResourceManager.GetString("PlantillaVentas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap provee {
+            get {
+                object obj = ResourceManager.GetObject("provee", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ventas {
+            get {
+                object obj = ResourceManager.GetObject("ventas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
