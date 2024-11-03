@@ -58,9 +58,9 @@ namespace ProyectodeferrerMaster.Interfaces
                         v.IdCliente,
                         v.FechaVenta,
                         v.Total,
-                        v.IdProducto,
-                        v.Cantidad
-                    })
+						v.IdProducto,
+						v.Cantidad
+					})
                     .ToList();
                 dgvDetalleVenta.DataSource = ventas;
             }
