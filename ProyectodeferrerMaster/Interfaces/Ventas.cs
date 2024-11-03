@@ -51,19 +51,31 @@ namespace ProyectodeferrerMaster.Interfaces
         {
             using (var context = new ApplicationDbContext())
             {
-                var ventas = context.Ventas
-                    .Select(v => new
-                    {
-                        v.IdVenta,
-                        v.IdCliente,
-                        v.FechaVenta,
-                        v.Total,
-						v.IdProducto,
-						v.Cantidad
-					})
-                    .ToList();
-                dgvDetalleVenta.DataSource = ventas;
-            }
+				var ventas = context.Ventas
+			.Join(context.Clientes,
+				  v => v.IdCliente,
+				  c => c.IdCliente,
+				  (v, c) => new { Venta = v, Cliente = c })
+			.Join(context.Productos,
+				  vc => vc.Venta.IdProducto,
+				  p => p.IdProducto,
+				  (vc, p) => new
+				  {
+					  vc.Venta.IdVenta,
+					  Cliente = vc.Cliente.NombreCliente,  // Nombre del cliente
+					  Producto = p.NombreProducto,         // Nombre del producto
+					  vc.Venta.Cantidad,
+					  vc.Venta.Total,
+					  vc.Venta.FechaVenta
+				  })
+			.ToList();
+
+				dgvDetalleVenta.DataSource = ventas;
+
+				// Cambiar los encabezados de las columnas si es necesario
+				dgvDetalleVenta.Columns["Cliente"].HeaderText = "Nombre del Cliente";
+				dgvDetalleVenta.Columns["Producto"].HeaderText = "Nombre del Producto";
+			}
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

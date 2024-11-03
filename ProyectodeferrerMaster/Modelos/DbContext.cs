@@ -16,7 +16,7 @@ namespace ProyectodeferrerMaster.Modelos
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=LAPTOP-GIGABYTE;Initial Catalog=TiendaOnline1;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
+            optionsBuilder.UseSqlServer("Data Source=MIRANDA\\SQLDEV2022;Initial Catalog=TiendaOnline1;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
         }
 
 
