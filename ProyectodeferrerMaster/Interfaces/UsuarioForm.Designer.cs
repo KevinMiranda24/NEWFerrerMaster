@@ -260,9 +260,9 @@
             label5.ForeColor = Color.FromArgb(44, 62, 80);
             label5.Location = new Point(346, 3);
             label5.Name = "label5";
-            label5.Size = new Size(241, 32);
+            label5.Size = new Size(266, 32);
             label5.TabIndex = 53;
-            label5.Text = "Detalles del Cliente";
+            label5.Text = "Detalles de Empleado";
             // 
             // UsuarioForm
             // 

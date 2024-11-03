@@ -27,20 +27,19 @@
 
         private void clientesToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            // Verificamos si el formulario ya está abierto
-            UsuarioForm formUsuario = Application.OpenForms.OfType<UsuarioForm>().FirstOrDefault();
+            Clientes formClientes = Application.OpenForms.OfType<Clientes>().FirstOrDefault();
 
-            if (formUsuario == null)
+            if (formClientes == null)
             {
                 // Si no está abierto, lo instanciamos y lo mostramos
-                formUsuario = new UsuarioForm();
-                formUsuario.MdiParent = this;  // Asignamos el contenedor MDI (si tienes habilitada la propiedad IsMdiContainer)
-                formUsuario.Show();
+                formClientes = new Clientes();
+                formClientes.MdiParent = this;  // Asignamos el contenedor MDI si la propiedad IsMdiContainer está habilitada
+                formClientes.Show();
             }
             else
             {
                 // Si ya está abierto, traemos el formulario al frente
-                formUsuario.BringToFront();
+                formClientes.BringToFront();
             }
         }
 
@@ -146,6 +145,24 @@
         private void generarReportesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void gestiónDeEmpleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UsuarioForm formUsuario = Application.OpenForms.OfType<UsuarioForm>().FirstOrDefault();
+
+            if (formUsuario == null)
+            {
+                // Si no está abierto, lo instanciamos y lo mostramos
+                formUsuario = new UsuarioForm();
+                formUsuario.MdiParent = this;  // Asignamos el contenedor MDI si la propiedad IsMdiContainer está habilitada
+                formUsuario.Show();
+            }
+            else
+            {
+                // Si ya está abierto, traemos el formulario al frente
+                formUsuario.BringToFront();
+            }
         }
     }
 }

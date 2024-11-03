@@ -243,17 +243,22 @@ namespace ProyectodeferrerMaster.Interfaces
         private void btnRepProductos_Click(object sender, EventArgs e)
         {
             SaveFileDialog guardar = new SaveFileDialog();
-            guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + "_Productos.pdf";
+            guardar.FileName = DateTime.Now.ToString("dd/MM/yyyy") + "_Productos.pdf";
 
+            // Cargar la plantilla HTML base para el reporte
             string paginahtml_text = Properties.Resources.Plantilla1.ToString();
-            string cliente = "Cliente Ejemplo";
+
+            // Configurar valores para los marcadores de cliente, documento y fecha
+            string cliente = "Reporte de Inventario";
             string documento = "12345678";
             string fecha = DateTime.Now.ToString("dd/MM/yyyy");
 
+            // Reemplazar los marcadores en la plantilla
             paginahtml_text = paginahtml_text.Replace("@Cliente", cliente);
             paginahtml_text = paginahtml_text.Replace("@Documento", documento);
             paginahtml_text = paginahtml_text.Replace("@Fecha", fecha);
 
+            // Construir las filas del DataGridView en formato HTML
             string filas = string.Empty;
             foreach (DataGridViewRow row in dgvProductos.Rows)
             {
@@ -270,11 +275,17 @@ namespace ProyectodeferrerMaster.Interfaces
                 }
             }
 
+            // Reemplazar el marcador de filas en la plantilla HTML
             paginahtml_text = paginahtml_text.Replace("@Filas", filas);
 
+            // Configurar el flag para la etiqueta <td>
             HtmlAgilityPack.HtmlNode.ElementsFlags["td"] = HtmlAgilityPack.HtmlElementFlag.Closed;
+
+            // Crear un documento HTML
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(paginahtml_text);
+            doc.LoadHtml(paginahtml_text); // Cargar el HTML después de los reemplazos
+
+            // Convertir el HTML limpio de vuelta a cadena
             paginahtml_text = doc.DocumentNode.OuterHtml;
 
             if (guardar.ShowDialog() == DialogResult.OK)
@@ -304,6 +315,7 @@ namespace ProyectodeferrerMaster.Interfaces
                 MessageBox.Show("Reporte PDF generado exitosamente.");
             }
         }
+
 
     }
 }

@@ -181,5 +181,37 @@ namespace ProyectodeferrerMaster.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Web Page Design&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///            table.border th, table.border td {
+        ///                padding: 5px;
+        ///                border: 1px solid black;
+        ///            }
+        ///
+        ///        .header-table td {
+        ///            padding: 10px 0;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;table style=&quot;width:100%&quot;&gt;
+        ///        &lt;tr&gt;
+        ///            &lt;td style=&quot;width:20%&quot;&gt;&lt;/td&gt;
+        ///            &lt;td style=&quot;width [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string Ventas1 {
+            get {
+                return ResourceManager.GetString("Ventas1", resourceCulture);
+            }
+        }
     }
 }

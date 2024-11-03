@@ -35,9 +35,9 @@
             inventariosToolStripMenuItem = new ToolStripMenuItem();
             proveedoresToolStripMenuItem = new ToolStripMenuItem();
             gestiónDeProveedoresToolStripMenuItem = new ToolStripMenuItem();
-            reportesToolStripMenuItem = new ToolStripMenuItem();
             label2 = new Label();
-            generarReportesToolStripMenuItem = new ToolStripMenuItem();
+            empleadosToolStripMenuItem = new ToolStripMenuItem();
+            gestiónDeEmpleadosToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,7 +56,7 @@
             // 
             menuStrip1.BackColor = Color.FromArgb(236, 240, 241);
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { clientesToolStripMenuItem1, categoriaToolStripMenuItem, ventasToolStripMenuItem1, clientesToolStripMenuItem, ventasToolStripMenuItem, proveedoresToolStripMenuItem, reportesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { clientesToolStripMenuItem1, categoriaToolStripMenuItem, ventasToolStripMenuItem1, clientesToolStripMenuItem, ventasToolStripMenuItem, proveedoresToolStripMenuItem, empleadosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1125, 33);
@@ -77,7 +77,7 @@
             // clientesToolStripMenuItem2
             // 
             clientesToolStripMenuItem2.Name = "clientesToolStripMenuItem2";
-            clientesToolStripMenuItem2.Size = new Size(151, 30);
+            clientesToolStripMenuItem2.Size = new Size(180, 30);
             clientesToolStripMenuItem2.Text = "Clientes";
             clientesToolStripMenuItem2.Click += clientesToolStripMenuItem2_Click;
             // 
@@ -111,7 +111,7 @@
             // comprasToolStripMenuItem
             // 
             comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
-            comprasToolStripMenuItem.Size = new Size(156, 30);
+            comprasToolStripMenuItem.Size = new Size(180, 30);
             comprasToolStripMenuItem.Text = "compras";
             comprasToolStripMenuItem.Click += comprasToolStripMenuItem_Click;
             // 
@@ -145,7 +145,7 @@
             // inventariosToolStripMenuItem
             // 
             inventariosToolStripMenuItem.Name = "inventariosToolStripMenuItem";
-            inventariosToolStripMenuItem.Size = new Size(177, 30);
+            inventariosToolStripMenuItem.Size = new Size(180, 30);
             inventariosToolStripMenuItem.Text = "Inventarios";
             inventariosToolStripMenuItem.Click += inventariosToolStripMenuItem_Click;
             // 
@@ -166,16 +166,6 @@
             gestiónDeProveedoresToolStripMenuItem.Text = "Gestión de Proveedores";
             gestiónDeProveedoresToolStripMenuItem.Click += gestiónDeProveedoresToolStripMenuItem_Click;
             // 
-            // reportesToolStripMenuItem
-            // 
-            reportesToolStripMenuItem.BackColor = SystemColors.ButtonFace;
-            reportesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { generarReportesToolStripMenuItem });
-            reportesToolStripMenuItem.Font = new Font("Segoe UI", 14.25F);
-            reportesToolStripMenuItem.ForeColor = Color.FromArgb(44, 62, 80);
-            reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            reportesToolStripMenuItem.Size = new Size(97, 29);
-            reportesToolStripMenuItem.Text = "Reportes";
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -186,12 +176,21 @@
             label2.TabIndex = 1;
             label2.Text = "FerrerMaster";
             // 
-            // generarReportesToolStripMenuItem
+            // empleadosToolStripMenuItem
             // 
-            generarReportesToolStripMenuItem.Name = "generarReportesToolStripMenuItem";
-            generarReportesToolStripMenuItem.Size = new Size(230, 30);
-            generarReportesToolStripMenuItem.Text = "Generar Reportes";
-            generarReportesToolStripMenuItem.Click += generarReportesToolStripMenuItem_Click;
+            empleadosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gestiónDeEmpleadosToolStripMenuItem });
+            empleadosToolStripMenuItem.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            empleadosToolStripMenuItem.ForeColor = Color.FromArgb(64, 64, 64);
+            empleadosToolStripMenuItem.Name = "empleadosToolStripMenuItem";
+            empleadosToolStripMenuItem.Size = new Size(116, 29);
+            empleadosToolStripMenuItem.Text = "Empleados";
+            // 
+            // gestiónDeEmpleadosToolStripMenuItem
+            // 
+            gestiónDeEmpleadosToolStripMenuItem.Name = "gestiónDeEmpleadosToolStripMenuItem";
+            gestiónDeEmpleadosToolStripMenuItem.Size = new Size(271, 30);
+            gestiónDeEmpleadosToolStripMenuItem.Text = "Gestión de empleados";
+            gestiónDeEmpleadosToolStripMenuItem.Click += gestiónDeEmpleadosToolStripMenuItem_Click;
             // 
             // Inicio1
             // 
@@ -214,7 +213,6 @@
         private ToolStripMenuItem ventasToolStripMenuItem;
         private ToolStripMenuItem clientesToolStripMenuItem;
         private ToolStripMenuItem proveedoresToolStripMenuItem;
-        private ToolStripMenuItem reportesToolStripMenuItem;
         private Label label2;
         private ToolStripMenuItem clientesToolStripMenuItem1;
         private ToolStripMenuItem clientesToolStripMenuItem2;
@@ -225,6 +223,7 @@
         private ToolStripMenuItem categoriaToolStripMenuItem;
         private ToolStripMenuItem tiposDeCategoriasToolStripMenuItem;
         private ToolStripMenuItem gestiónDeProveedoresToolStripMenuItem;
-        private ToolStripMenuItem generarReportesToolStripMenuItem;
+        private ToolStripMenuItem empleadosToolStripMenuItem;
+        private ToolStripMenuItem gestiónDeEmpleadosToolStripMenuItem;
     }
 }
